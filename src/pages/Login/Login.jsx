@@ -21,7 +21,23 @@ const Login = () => {
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
-      await signIn(data.email, data.password);
+       await signIn(data.email, data.password);
+
+      /**
+       * SAVE USER TO DATABASE
+       */
+      // await fetch("http://localhost:3000/users", {
+      //   method: "POST",
+      //   headers: {
+      //     "content-type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     name: result.user.displayName || null,
+      //     email: result.user.email,
+      //     photoURL: result.user.photoURL || null,
+      //   }),
+      // });
+
       //Successful login toast
       toast.success("Login successful! Welcome back.", {
         duration: 3000,
@@ -43,7 +59,21 @@ const Login = () => {
   const handleGoogle = async () => {
     setIsLoading(true);
     try {
-      await googleSignIn();
+       await googleSignIn();
+
+      // SAVE GOOGLE USER TO DATABASE
+      // await fetch("http://localhost:3000/users", {
+      //   method: "POST",
+      //   headers: {
+      //     "content-type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     name: result.user.displayName,
+      //     email: result.user.email,
+      //     photoURL: result.user.photoURL,
+      //   }),
+      // });
+
       toast.success("Google login successful! Welcome back.", {
         duration: 3000,
         position: "top-right",
