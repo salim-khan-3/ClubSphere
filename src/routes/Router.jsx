@@ -10,7 +10,7 @@ import ManagerDashboard from "../dashboard/Manager/ManagerDashboard";
 import MemberDashboard from "../dashboard/Member/MemberDashboard";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import ManageUser from "../dashboard/Admin/ManageUser/ManageUser";
-import ManageUserCard from "../dashboard/Admin/ManageUser/ManageUserCard";
+// import ManageUserCard from "../dashboard/Admin/ManageUser/ManageUserCard";
 import MangeClub from "../dashboard/Admin/ManageClubs/MangeClub";
 import Payment from "../dashboard/Admin/Payments/Payment";
 import ManagerOverview from "../dashboard/Manager/Manager Overview/ManagerOverview";
@@ -24,6 +24,7 @@ import My_Clubs from "../dashboard/Member/My-clubs/My_Clubs";
 import ClubDetails from "../dashboard/Member/My-clubs/ClubDetails ";
 import MyEvents from "../dashboard/Member/My-Events/MyEvents";
 import PaymentHistory from "../dashboard/Member/Payment-History/PaymentHistory";
+import ClubDetailspage from "../pages/Clubs/ClubDetails";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
         path: "/clubs",
         Component: Clubs,
       },
+      {
+        path:"/club_details/:id",
+        Component:ClubDetailspage
+      }
     ],
   },
   {
