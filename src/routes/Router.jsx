@@ -25,6 +25,7 @@ import ClubDetails from "../dashboard/Member/My-clubs/ClubDetails ";
 import MyEvents from "../dashboard/Member/My-Events/MyEvents";
 import PaymentHistory from "../dashboard/Member/Payment-History/PaymentHistory";
 import ClubDetailspage from "../pages/Clubs/ClubDetails";
+import AdminOverview from "../dashboard/Admin/AdminOverviews/AdminOverview";
 
 export const router = createBrowserRouter([
   {
@@ -68,7 +69,7 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            Component: AdminDashboard,
+            Component: AdminOverview,
           },
           {
             path: "manage-users",

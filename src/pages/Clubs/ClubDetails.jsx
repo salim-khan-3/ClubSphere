@@ -9,7 +9,11 @@ const ClubDetailspage = () => {
   const { id } = useParams();
   console.log(typeof id);
 
-  const { data: club, isLoading, error } = useQuery({
+  const {
+    data: club,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["club", id],
     queryFn: async () => {
       const res = await axiosInstance.get(`/clubs/${id}`);
@@ -43,6 +47,9 @@ const ClubDetailspage = () => {
         </div>
         <p>Created At: {new Date(club.createdAt).toLocaleString()}</p>
         <p>Last Updated: {new Date(club.updatedAt).toLocaleString()}</p>
+        <div className="w-full text-center">
+          <button className="px-8 py-4 w-full bg-indigo-600 rounded-lg text-white font-bold cursor-pointer">Join Club</button>
+        </div>
       </div>
     </div>
   );
