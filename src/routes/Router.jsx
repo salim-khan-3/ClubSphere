@@ -26,6 +26,7 @@ import MyEvents from "../dashboard/Member/My-Events/MyEvents";
 import PaymentHistory from "../dashboard/Member/Payment-History/PaymentHistory";
 import ClubDetailspage from "../pages/Clubs/ClubDetails";
 import AdminOverview from "../dashboard/Admin/AdminOverviews/AdminOverview";
+import CreateEventForm from "../dashboard/Manager/events-Management/CreateEventForm";
 
 export const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
       {
         path:"/club_details/:id",
         Component:ClubDetailspage
+      },
+      {
+        path:"events",
+        Component:EventsManagement
       }
     ],
   },
@@ -120,6 +125,10 @@ export const router = createBrowserRouter([
           {
             path: "my-clubs",
             Component: MyClubs,
+          },
+          {
+            path:"create_event",
+            Component:CreateEventForm
           },
           {
             path: "create-club",
