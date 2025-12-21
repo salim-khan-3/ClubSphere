@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../../Context/AuthContext";
 
 const CreateClub = () => {
-    const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
-    const {
+  const {
     register,
     handleSubmit,
     reset,
@@ -22,10 +22,18 @@ const CreateClub = () => {
     },
   });
 
-
   const categories = [
-    "Tech", "Photography", "Sports", "Music", "Art", "Gaming",
-    "Business", "Education", "Science", "Literature", "Others"
+    "Tech",
+    "Photography",
+    "Sports",
+    "Music",
+    "Art",
+    "Gaming",
+    "Business",
+    "Education",
+    "Science",
+    "Literature",
+    "Others",
   ];
 
   const onSubmit = async (data) => {
@@ -60,9 +68,8 @@ const CreateClub = () => {
     }
   };
 
-  
-    return (
-<div className="min-h-screen bg-gray-50 py-10 px-4">
+  return (
+    <div className="min-h-screen bg-gray-50 py-10 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
           <h2 className="text-4xl font-bold text-center text-indigo-700 mb-10">
@@ -70,7 +77,6 @@ const CreateClub = () => {
           </h2>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-7">
-
             {/* Club Name */}
             <div>
               <label className="block text-lg font-medium text-gray-700 mb-2">
@@ -79,13 +85,17 @@ const CreateClub = () => {
               <input
                 {...register("clubName", {
                   required: "Club name is required",
-                  minLength: { value: 3, message: "At least 3 characters" }
+                  minLength: { value: 3, message: "At least 3 characters" },
                 })}
                 type="text"
                 className="w-full px-5 py-4 border border-gray-300 rounded-xl focus:ring-4 focus:ring-indigo-200 focus:border-indigo-600 outline-none transition"
                 placeholder="e.g. Dhaka Coders Club"
               />
-              {errors.clubName && <p className="text-red-500 text-sm mt-2">{errors.clubName.message}</p>}
+              {errors.clubName && (
+                <p className="text-red-500 text-sm mt-2">
+                  {errors.clubName.message}
+                </p>
+              )}
             </div>
 
             {/* Category & Location */}
@@ -95,14 +105,22 @@ const CreateClub = () => {
                   Category <span className="text-red-500">*</span>
                 </label>
                 <select
-                  {...register("category", { required: "Please select a category" })}
+                  {...register("category", {
+                    required: "Please select a category",
+                  })}
                   className="w-full px-5 py-4 border border-gray-300 rounded-xl focus:ring-4 focus:ring-indigo-200 outline-none"
                 >
-                  {categories.map(cat => (
-                    <option key={cat} value={cat}>{cat}</option>
+                  {categories.map((cat) => (
+                    <option key={cat} value={cat}>
+                      {cat}
+                    </option>
                   ))}
                 </select>
-                {errors.category && <p className="text-red-500 text-sm mt-2">{errors.category.message}</p>}
+                {errors.category && (
+                  <p className="text-red-500 text-sm mt-2">
+                    {errors.category.message}
+                  </p>
+                )}
               </div>
 
               <div>
@@ -110,12 +128,18 @@ const CreateClub = () => {
                   Location <span className="text-red-500">*</span>
                 </label>
                 <input
-                  {...register("location", { required: "Location is required" })}
+                  {...register("location", {
+                    required: "Location is required",
+                  })}
                   type="text"
                   className="w-full px-5 py-4 border border-gray-300 rounded-xl focus:ring-4 focus:ring-indigo-200 outline-none"
                   placeholder="e.g. Dhaka, Bangladesh"
                 />
-                {errors.location && <p className="text-red-500 text-sm mt-2">{errors.location.message}</p>}
+                {errors.location && (
+                  <p className="text-red-500 text-sm mt-2">
+                    {errors.location.message}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -126,7 +150,7 @@ const CreateClub = () => {
               </label>
               <input
                 {...register("membershipFee", {
-                  min: { value: 0, message: "Fee cannot be negative" }
+                  min: { value: 0, message: "Fee cannot be negative" },
                 })}
                 type="number"
                 className="w-full px-5 py-4 border border-gray-300 rounded-xl focus:ring-4 focus:ring-indigo-200 outline-none"
@@ -147,7 +171,6 @@ const CreateClub = () => {
               />
             </div>
 
-
             {/* Description */}
             <div>
               <label className="block text-lg font-medium text-gray-700 mb-2">
@@ -156,13 +179,20 @@ const CreateClub = () => {
               <textarea
                 {...register("description", {
                   required: "Description is required",
-                  minLength: { value: 20, message: "Write at least 20 characters" }
+                  minLength: {
+                    value: 20,
+                    message: "Write at least 20 characters",
+                  },
                 })}
                 rows="6"
                 className="w-full px-5 py-4 border border-gray-300 rounded-xl focus:ring-4 focus:ring-indigo-200 outline-none resize-none"
                 placeholder="What is your club about? Activities? Goals?..."
               ></textarea>
-              {errors.description && <p className="text-red-500 text-sm mt-2">{errors.description.message}</p>}
+              {errors.description && (
+                <p className="text-red-500 text-sm mt-2">
+                  {errors.description.message}
+                </p>
+              )}
             </div>
 
             {/* Submit Button */}
@@ -177,13 +207,14 @@ const CreateClub = () => {
             </div>
 
             <p className="text-center text-gray-600 mt-8 text-lg">
-              Your club will be reviewed by admin → Status: <span className="font-bold text-orange-600">Pending</span>
+              Your club will be reviewed by admin → Status:{" "}
+              <span className="font-bold text-orange-600">Pending</span>
             </p>
           </form>
         </div>
       </div>
     </div>
-    );
+  );
 };
 
 export default CreateClub;

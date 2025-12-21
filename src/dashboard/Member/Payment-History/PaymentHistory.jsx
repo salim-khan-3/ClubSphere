@@ -1,33 +1,40 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { AuthContext } from "../../../Context/AuthContext";
+import Loader from "../../../Components/Loader/Loader";
 
 const PaymentHistory = () => {
-  // Dummy Data (later replace with API)
-  const payments = [
-    {
-      id: 1,
-      amount: 500,
-      type: "Membership Fee",
-      club: "Chess Club",
-      date: "2025-01-12",
-      status: "Paid",
+  const { user } = useContext(AuthContext);
+
+  const {
+    data: payments = [],
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["payments", user?.email],
+    enabled: !!user?.email,
+    queryFn: async () => {
+      const token = await user.getIdToken();
+
+      const res = await axios.get(
+        "http://localhost:3000/dashboard/member/payments",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return res.data;
     },
-    {
-      id: 2,
-      amount: 300,
-      type: "Event Fee",
-      club: "Art Club",
-      date: "2025-02-03",
-      status: "Pending",
-    },
-    {
-      id: 3,
-      amount: 700,
-      type: "Membership Renewal",
-      club: "Music Club",
-      date: "2025-02-10",
-      status: "Failed",
-    },
-  ];
+  });
+
+  if (isLoading) return <Loader />;
+  if (isError)
+    return (
+      <p className="text-red-500 p-6">Failed to load payment history</p>
+    );
 
   return (
     <section className="p-6">
@@ -35,7 +42,7 @@ const PaymentHistory = () => {
 
       {payments.length === 0 ? (
         <div className="bg-white shadow p-6 rounded-xl text-center">
-          <p className="text-gray-600 mb-2">No payment history found.</p>
+          <p className="text-gray-600">No payment history found.</p>
         </div>
       ) : (
         <div className="overflow-x-auto bg-white shadow-md rounded-xl">
@@ -44,7 +51,7 @@ const PaymentHistory = () => {
               <tr>
                 <th className="py-3 px-4">Amount</th>
                 <th className="py-3 px-4">Type</th>
-                <th className="py-3 px-4">Club</th>
+                <th className="py-3 px-4">Club / Event</th>
                 <th className="py-3 px-4">Date</th>
                 <th className="py-3 px-4">Status</th>
               </tr>
@@ -53,28 +60,46 @@ const PaymentHistory = () => {
             <tbody className="text-gray-700">
               {payments.map((p) => (
                 <tr
-                  key={p.id}
+                  key={p._id}
                   className="border-b hover:bg-gray-50 transition"
                 >
-                  <td className="py-3 px-4 font-medium">৳{p.amount}</td>
-                  <td className="py-3 px-4">{p.type}</td>
-                  <td className="py-3 px-4">{p.club}</td>
-                  <td className="py-3 px-4">{p.date}</td>
+                  {/* Amount */}
+                  <td className="py-3 px-4 font-medium">
+                    ${p.amount}
+                  </td>
 
+                  {/* Type */}
+                  <td className="py-3 px-4 capitalize">
+                    {p.type === "membership"
+                      ? "Membership Fee"
+                      : "Event Fee"}
+                  </td>
+
+                  {/* Club / Event */}
                   <td className="py-3 px-4">
-                    {p.status === "Paid" && (
+                    {p.clubName || p.eventTitle || "—"}
+                  </td>
+
+                  {/* Date */}
+                  <td className="py-3 px-4">
+                    {new Date(p.createdAt).toLocaleDateString()}
+                  </td>
+
+                  {/* Status */}
+                  <td className="py-3 px-4">
+                    {p.status === "paid" && (
                       <span className="px-3 py-1 text-xs rounded-full bg-green-100 text-green-700">
                         Paid
                       </span>
                     )}
 
-                    {p.status === "Pending" && (
+                    {p.status === "pending" && (
                       <span className="px-3 py-1 text-xs rounded-full bg-yellow-100 text-yellow-700">
                         Pending
                       </span>
                     )}
 
-                    {p.status === "Failed" && (
+                    {p.status === "failed" && (
                       <span className="px-3 py-1 text-xs rounded-full bg-red-100 text-red-700">
                         Failed
                       </span>

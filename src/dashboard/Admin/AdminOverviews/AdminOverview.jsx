@@ -18,6 +18,7 @@ const AdminOverview = () => {
       return res.data;
     },
   });
+  console.log(stats);
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error: {error.message}</p>;

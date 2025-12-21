@@ -27,6 +27,11 @@ import PaymentHistory from "../dashboard/Member/Payment-History/PaymentHistory";
 import ClubDetailspage from "../pages/Clubs/ClubDetails";
 import AdminOverview from "../dashboard/Admin/AdminOverviews/AdminOverview";
 import CreateEventForm from "../dashboard/Manager/events-Management/CreateEventForm";
+import Events from "../pages/Events/Events";
+import Event_Details from "../pages/Events/Event_Details";
+import UpdateClub from "../dashboard/Manager/My Clubs/UpdateClub";
+import UpdateEvent from "../dashboard/Manager/events-Management/UpdateEvent";
+import ProfilePage from "../pages/ProfilePage/ProfilePage";
 
 export const router = createBrowserRouter([
   {
@@ -42,13 +47,21 @@ export const router = createBrowserRouter([
         Component: Clubs,
       },
       {
-        path:"/club_details/:id",
-        Component:ClubDetailspage
+        path: "/club_details/:id",
+        Component: ClubDetailspage,
       },
       {
-        path:"events",
-        Component:EventsManagement
-      }
+        path: "events",
+        Component: Events,
+      },
+      {
+        path:"profile",
+        Component:ProfilePage
+      },
+      {
+        path: "/events_details/:id",
+        Component: Event_Details,
+      },
     ],
   },
   {
@@ -106,13 +119,13 @@ export const router = createBrowserRouter([
             Component: ClubDetails,
           },
           {
-            path:"myevents",
-            Component:MyEvents
+            path: "myevents",
+            Component: MyEvents,
           },
           {
-            path:"paymenthistory",
-            Component:PaymentHistory
-          }
+            path: "paymenthistory",
+            Component: PaymentHistory,
+          },
         ],
       },
       {
@@ -127,8 +140,8 @@ export const router = createBrowserRouter([
             Component: MyClubs,
           },
           {
-            path:"create_event",
-            Component:CreateEventForm
+            path: "create_event",
+            Component: CreateEventForm,
           },
           {
             path: "create-club",
@@ -137,6 +150,14 @@ export const router = createBrowserRouter([
           {
             path: "club-members",
             Component: ClubMembers,
+          },
+          {
+            path: "update_club/:id",
+            Component: UpdateClub,
+          },
+          {
+            path: "update-event/:id",
+            Component: UpdateEvent,
           },
           {
             path: "events-Management",
@@ -148,14 +169,6 @@ export const router = createBrowserRouter([
           },
         ],
       },
-      // {
-      //   path:"managerdashboard",
-      //   Component:ManagerDashboard
-      // },
-      // {
-      //   path:"memberdashboard",
-      //   Component:MemberDashboard
-      // },
     ],
   },
 ]);

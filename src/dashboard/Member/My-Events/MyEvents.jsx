@@ -1,32 +1,49 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { AuthContext } from "../../../Context/AuthContext";
+import Loader from "../../../Components/Loader/Loader";
 
 const MyEvents = () => {
-  // Dummy data (later replace with API data)
-  const registeredEvents = [
-    {
-      id: 1,
-      title: "Chess Tournament",
-      club: "Chess Club",
-      date: "2025-12-20",
-      status: "Registered",
+  const { user } = useContext(AuthContext);
+
+  const {
+    data: myEvents = [],
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["my-events", user?.email],
+    enabled: !!user?.email,
+    queryFn: async () => {
+      const token = await user.getIdToken();
+
+      const res = await axios.get(
+        "http://localhost:3000/dashboard/member/my-events",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      return res.data;
     },
-    {
-      id: 2,
-      title: "Art Workshop",
-      club: "Art Club",
-      date: "2025-11-15",
-      status: "Registered",
-    },
-  ];
+  });
+
+  if (isLoading) return <Loader />;
+  if (isError)
+    return <p className="text-red-500">Failed to load events</p>;
 
   return (
     <section className="p-6">
       <h2 className="text-2xl font-semibold mb-4">My Events</h2>
 
-      {registeredEvents.length === 0 ? (
+      {myEvents.length === 0 ? (
         <div className="bg-white shadow p-6 rounded-xl text-center">
-          <p className="text-gray-600 mb-3">You haven’t registered for any events.</p>
+          <p className="text-gray-600 mb-3">
+            You haven’t registered for any events.
+          </p>
           <Link
             to="/events"
             className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
@@ -47,15 +64,21 @@ const MyEvents = () => {
             </thead>
 
             <tbody className="text-gray-700">
-              {registeredEvents.map((event) => (
+              {myEvents.map((event) => (
                 <tr
-                  key={event.id}
+                  key={event._id}
                   className="border-b hover:bg-gray-50 transition"
                 >
-                  <td className="py-3 px-4 font-medium">{event.title}</td>
-                  <td className="py-3 px-4">{event.club}</td>
-                  <td className="py-3 px-4">{event.date}</td>
-                  <td>
+                  <td className="py-3 px-4 font-medium">
+                    {event.eventInfo.title}
+                  </td>
+                  <td className="py-3 px-4">
+                    {event.eventInfo.clubName}
+                  </td>
+                  <td className="py-3 px-4">
+                    {new Date(event.eventInfo.date).toLocaleDateString()}
+                  </td>
+                  <td className="py-3 px-4">
                     <span className="py-1 px-3 bg-green-100 text-green-700 text-xs rounded-full">
                       {event.status}
                     </span>

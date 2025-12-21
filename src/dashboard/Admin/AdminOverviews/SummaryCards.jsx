@@ -4,14 +4,14 @@ const SummaryCards = ({ stats = {} }) => {
   const {
     totalUsers = 0,
     totalClubs = 0,
-    totalMemberships = 0,
+    totalMembership = 0,
     totalPayments = 0,
   } = stats;
 
   const summaryData = [
     { title: "Total Users", value: totalUsers },
     { title: "Total Clubs", value: totalClubs },
-    { title: "Total Memberships", value: totalMemberships },
+    { title: "Total Memberships", value: totalMembership },
     { title: "Total Payments ($)", value: totalPayments },
   ];
 
