@@ -22,7 +22,7 @@ const MyProfile = () => {
 
     try {
       // 1️⃣ Backend update
-      const res = await axios.put(
+      const res = await axios.patch(
         `${backendUrl}/users/${encodeURIComponent(user.email)}`,
         updatedData,
         { headers: { Authorization: `Bearer ${token}` } }
@@ -59,7 +59,7 @@ const MyProfile = () => {
         <h2 className="text-3xl font-bold mb-6 text-indigo-600">My Profile</h2>
 
         <img
-          src={user?.photoURL || null} // warning avoid করার জন্য null use
+          src={user?.photoURL || null}
           alt="User Avatar"
           className="w-32 h-32 rounded-full mx-auto border-4 border-indigo-200 mb-4 object-cover"
         />
