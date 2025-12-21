@@ -32,6 +32,7 @@ import Event_Details from "../pages/Events/Event_Details";
 import UpdateClub from "../dashboard/Manager/My Clubs/UpdateClub";
 import UpdateEvent from "../dashboard/Manager/events-Management/UpdateEvent";
 import ProfilePage from "../pages/ProfilePage/ProfilePage";
+// import MyProfile from "../pages/ProfilePage/MyProfile";
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
         path:"profile",
         Component:ProfilePage
       },
+      // {
+      //   path:"profile",
+      //   Component:MyProfile
+      // },
       {
         path: "/events_details/:id",
         Component: Event_Details,
