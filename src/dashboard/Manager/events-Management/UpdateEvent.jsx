@@ -25,7 +25,7 @@ const UpdateEvent = () => {
     enabled: !!id && !!user?.email,
     queryFn: async () => {
       const token = await user.getIdToken();
-      const res = await axios.get(`http://localhost:3000/events/${id}`, {
+      const res = await axios.get(`https://club-sphere-server-six.vercel.app/events/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -82,7 +82,7 @@ const UpdateEvent = () => {
   const mutation = useMutation({
     mutationFn: async (data) => {
       const token = await user.getIdToken();
-      await axios.patch(`http://localhost:3000/events/${id}`, data, {
+      await axios.patch(`https://club-sphere-server-six.vercel.app/events/${id}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

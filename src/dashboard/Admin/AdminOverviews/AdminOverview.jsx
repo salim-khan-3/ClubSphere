@@ -2,11 +2,11 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
-import { auth } from '../../../firebase/firebase.init'; // আপনার পাথ অনুযায়ী ইম্পোর্ট করুন
+import { auth } from '../../../firebase/firebase.init'; 
 
 const AdminOverview = () => {
 
-    // টোকেন পাওয়ার জন্য একটি হেল্পার ফাংশন
+    
     const getAdminToken = async () => {
         const user = auth.currentUser;
         if (user) {
@@ -15,24 +15,23 @@ const AdminOverview = () => {
         return null;
     };
 
-    // ১. সামারি ডেটা ফেচ করা
+    
     const { data: stats = {}, isLoading: statsLoading } = useQuery({
         queryKey: ['admin-stats'],
         queryFn: async () => {
             const token = await getAdminToken();
-            const res = await axios.get('http://localhost:3000/admin/overview-stats', {
+            const res = await axios.get('https://club-sphere-server-six.vercel.app/admin/overview-stats', {
                 headers: { authorization: `Bearer ${token}` }
             });
             return res.data;
         }
     });
 
-    // ২. চার্ট ডেটা ফেচ করা
     const { data: chartData = [], isLoading: chartLoading } = useQuery({
         queryKey: ['admin-chart'],
         queryFn: async () => {
             const token = await getAdminToken();
-            const res = await axios.get('http://localhost:3000/admin/chart-data', {
+            const res = await axios.get('https://club-sphere-server-six.vercel.app/admin/chart-data', {
                 headers: { authorization: `Bearer ${token}` }
             });
             return res.data;
@@ -100,7 +99,7 @@ const AdminOverview = () => {
     );
 };
 
-// ছোট সাব-কম্পোনেন্ট কার্ডের জন্য
+
 const StatCard = ({ title, value, color }) => (
     <div className={`${color} p-6 rounded-3xl shadow-lg text-white`}>
         <p className="text-sm font-medium opacity-80 uppercase tracking-wider">{title}</p>

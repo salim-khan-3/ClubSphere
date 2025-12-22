@@ -19,7 +19,7 @@ import { auth } from "../../../firebase/firebase.init";
 import ManagerOverviewCard from "./ManagerOverviewCard";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://club-sphere-server-six.vercel.app/",
 });
 
 const ManagerOverview = () => {
@@ -35,7 +35,8 @@ const ManagerOverview = () => {
       // 🔐 Firebase ID Token (REAL token)
       const token = await user.getIdToken();
 
-      const res = await axiosSecure.get("/manager/overview-stats", {
+      // const res = await axiosSecure.get("/manager/overview-stats", {
+      const res = await axiosSecure.get("manager/overview-stats", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

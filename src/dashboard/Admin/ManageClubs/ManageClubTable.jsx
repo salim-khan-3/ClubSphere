@@ -5,7 +5,7 @@ import { Eye, Check, X } from "lucide-react";
 import Loader from "../../../Components/Loader/Loader";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://club-sphere-server-six.vercel.app/",
 });
 
 const ManageClubTable = () => {
@@ -15,7 +15,7 @@ const ManageClubTable = () => {
   const { data: clubs = [], isLoading } = useQuery({
     queryKey: ["clubs"],
     queryFn: async () => {
-      const res = await axiosInstance.get("/clubs/all");
+      const res = await axiosInstance.get("clubs/all");
       return res.data;
     },
   });
@@ -23,7 +23,7 @@ const ManageClubTable = () => {
   // APPROVE mutation
   const approveMutation = useMutation({
     mutationFn: async (id) => {
-      return axiosInstance.patch(`/clubs/approve/${id}`);
+      return axiosInstance.patch(`clubs/approve/${id}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["clubs"]);
@@ -33,7 +33,7 @@ const ManageClubTable = () => {
   // REJECT mutation
   const rejectMutation = useMutation({
     mutationFn: async (id) => {
-      return axiosInstance.patch(`/clubs/reject/${id}`);
+      return axiosInstance.patch(`clubs/reject/${id}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["clubs"]);

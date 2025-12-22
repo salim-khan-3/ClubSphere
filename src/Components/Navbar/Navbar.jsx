@@ -1,24 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import { useState, useContext, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { AuthContext } from "../../Context/AuthContext";
@@ -27,14 +6,12 @@ import { MdDashboard } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import Sidebar from "../../dashboard/Shared/Sidebar/Sidebar";
 
-// নতুন যোগ করা লাইন – এটা আগে ছিল না
-// import Sidebar from "../dashboard/Shared/Sidebar/Sidebar";  
+
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [openSidebar, setOpenSidebar] = useState(false);
-  // এটা আগে ছিল, থাকবে
   const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -54,7 +31,7 @@ const Navbar = () => {
     try {
       await logOut();
       setDropdownOpen(false);
-      setOpenSidebar(false); // মোবাইল সাইডবারও বন্ধ
+      setOpenSidebar(false); 
       toast.success("Successfully logged out");
       navigate("/auth/login");
     } catch (error) {
@@ -303,7 +280,6 @@ const Navbar = () => {
         )}
       </nav>
 
-      {/* ==================== নতুন মোবাইল ড্যাশবোর্ড সাইডবার ==================== */}
       {openSidebar && (
         <div className="fixed inset-0 z-50 flex md:hidden">
           {/* Overlay */}
@@ -347,7 +323,6 @@ const Navbar = () => {
               </div>
             )}
 
-            {/* পুরো Sidebar কম্পোনেন্ট এখানে রেন্ডার হচ্ছে */}
             <Sidebar isMobile={true} onClose={() => setOpenSidebar(false)} />
           </div>
         </div>

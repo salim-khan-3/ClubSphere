@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { AuthContext } from "../../../Context/AuthContext";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Loader from "../../../Components/Loader/Loader";
-import Swal from "sweetalert2"; // 👈 SweetAlert2 ইম্পোর্ট
+import Swal from "sweetalert2"; 
 
 const MyClubs = () => {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const MyClubs = () => {
     queryKey: ["myclubs", user?.email],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:3000/clubs/my-clubs?email=${user?.email}`
+        `https://club-sphere-server-six.vercel.app/clubs/my-clubs?email=${user?.email}`
       );
       return res.data;
     },

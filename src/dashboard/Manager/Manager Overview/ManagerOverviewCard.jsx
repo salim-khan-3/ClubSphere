@@ -23,7 +23,7 @@ const ManagerOverviewCard = ({ stats }) => {
     {
       id: "payments",
       label: "Total Payments",
-      value: `৳${stats.totalPayments}`,
+      value: `$${stats.totalPayments}`,
       icon: <CreditCard className="w-6 h-6" />,
     },
   ];

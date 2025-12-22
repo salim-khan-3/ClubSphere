@@ -42,7 +42,7 @@ const CreateClub = () => {
       return;
     }
     try {
-      const response = await fetch("http://localhost:3000/clubs", {
+      const response = await fetch("https://club-sphere-server-six.vercel.app/clubs", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

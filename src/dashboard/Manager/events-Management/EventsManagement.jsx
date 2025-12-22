@@ -197,7 +197,7 @@ const EventsManagement = () => {
     queryFn: async () => {
       const token = await user.getIdToken();
       const res = await axios.get(
-        "http://localhost:3000/manager/events",
+        "https://club-sphere-server-six.vercel.app/manager/events",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -228,7 +228,7 @@ const EventsManagement = () => {
     try {
       const token = await user.getIdToken();
 
-      await axios.delete(`http://localhost:3000/events/${eventId}`, {
+      await axios.delete(`https://club-sphere-server-six.vercel.app/events/${eventId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -13,7 +13,7 @@ const Payment = () => {
     queryFn: async () => {
       const token = await user.getIdToken();
 
-      const res = await axios.get("http://localhost:3000/admin/payments", {
+      const res = await axios.get("https://club-sphere-server-six.vercel.app/admin/payments", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

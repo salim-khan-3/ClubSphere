@@ -19,7 +19,7 @@ const ClubMembers = () => {
     queryKey: ["clubMembers", user?.email],
     queryFn: async () => {
       const token = await user.getIdToken();
-      const res = await axios.get("http://localhost:3000/manager/club-members", {
+      const res = await axios.get("https://club-sphere-server-six.vercel.app/manager/club-members", {
         headers: { Authorization: `Bearer ${token}` },
       });
       return res.data;
@@ -32,7 +32,7 @@ const ClubMembers = () => {
     mutationFn: async ({ clubId, userEmail }) => {
       const token = await user.getIdToken();
       await axios.patch(
-        "http://localhost:3000/manager/set-membership-expired",
+        "https://club-sphere-server-six.vercel.app/manager/set-membership-expired",
         { clubId, userEmail },
         { headers: { Authorization: `Bearer ${token}` } }
       );

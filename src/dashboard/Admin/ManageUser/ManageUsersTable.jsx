@@ -7,7 +7,8 @@ import { auth } from "../../../firebase/firebase.init"; // <--- তোমার 
 import Loader from "../../../Components/Loader/Loader";
 import toast from "react-hot-toast"; // npm i react-hot-toast করো যদি না থাকে
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+// const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const API_URL = import.meta.env.VITE_API_URL || "https://club-sphere-server-six.vercel.app";
 
 const ManageUsersTable = () => {
   const queryClient = useQueryClient();

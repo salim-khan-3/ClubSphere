@@ -364,7 +364,7 @@ import toast from "react-hot-toast";
 
 // Axios Instance
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://club-sphere-server-six.vercel.app/",
 });
 
 const CreateEventForm = () => {
@@ -374,7 +374,8 @@ const CreateEventForm = () => {
   const { data: clubs = [], isLoading } = useQuery({
     queryKey: ["clubs"],
     queryFn: async () => {
-      const res = await axiosInstance.get("/clubs/all");
+      // const res = await axiosInstance.get("/clubs/all");
+      const res = await axiosInstance.get("clubs/all");
       return res.data;
     },
   });
@@ -385,7 +386,8 @@ const CreateEventForm = () => {
     enabled: !!user?.email,
     queryFn: async () => {
       const res = await axiosInstance.get(
-        `/users/role-info?email=${user.email}`
+        // `/users/role-info?email=${user.email}`
+        `users/role-info?email=${user.email}`
       );
       return res.data;
     },
@@ -455,7 +457,7 @@ const CreateEventForm = () => {
 
       console.log("Event Payload:", payload);
 
-      const response = await fetch("http://localhost:3000/events", {
+      const response = await fetch("https://club-sphere-server-six.vercel.app/events", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
