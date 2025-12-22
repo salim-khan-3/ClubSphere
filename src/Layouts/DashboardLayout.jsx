@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../Components/Navbar/Navbar';
 import Sidebar from '../dashboard/Shared/Sidebar/Sidebar';
 import { Outlet } from 'react-router';
+import Footer from '../Components/Footer/Footer';
 
 const DashboardLayout = () => {
     return (
@@ -14,6 +15,7 @@ const DashboardLayout = () => {
                     <Outlet></Outlet>
                 </div>
             </main>
+            <Footer></Footer>
         </div>
     );
 };

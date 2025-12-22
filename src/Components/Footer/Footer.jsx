@@ -32,17 +32,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Dashboard */}
-        <div>
-          <h3 className="text-lg font-semibold text-white mb-4">
-            Dashboard
-          </h3>
-          <ul className="space-y-2 text-sm">
-            <li><Link to="/dashboard/member" className="hover:text-indigo-400">Member</Link></li>
-            <li><Link to="/dashboard/manager" className="hover:text-indigo-400">Club Manager</Link></li>
-            <li><Link to="/dashboard/admin" className="hover:text-indigo-400">Admin</Link></li>
-          </ul>
-        </div>
+      
 
         {/* Social */}
         <div>

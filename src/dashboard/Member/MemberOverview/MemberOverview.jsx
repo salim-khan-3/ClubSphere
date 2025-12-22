@@ -19,8 +19,6 @@ const MemberOverview = () => {
   const { user } = useContext(AuthContext); // Firebase user
   const token = user?.stsTokenManager?.accessToken; // Firebase accessToken
 
-  console.log("User:", user);
-  console.log("Token:", token);
 
   // React Query
   const { data, isLoading, isError } = useQuery({
