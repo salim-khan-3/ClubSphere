@@ -26,7 +26,7 @@ const Register = () => {
       /** ------------------------------
        *  SAVE USER TO DATABASE HERE
        * ------------------------------ */
-      await fetch("http://localhost:3000/users", {
+      await fetch("https://club-sphere-server-six.vercel.app/users", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
@@ -62,7 +62,7 @@ const Register = () => {
       const result = await googleSignIn();
 
       /** SAVE GOOGLE USER TO DATABASE */
-      await fetch("http://localhost:3000/users", {
+      await fetch("https://club-sphere-server-six.vercel.app/users", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({

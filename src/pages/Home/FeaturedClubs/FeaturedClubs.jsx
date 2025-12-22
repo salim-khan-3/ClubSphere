@@ -15,7 +15,7 @@ const FeaturedClubs = () => {
   } = useQuery({
     queryKey: ["featuredClubs"],
     queryFn: async () => {
-      const response = await axios.get("http://localhost:3000/clubs/all");
+      const response = await axios.get("https://club-sphere-server-six.vercel.app/clubs/all");
 
       const processedData = response.data
         .filter((club) => club.status === "approved")

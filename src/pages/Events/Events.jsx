@@ -5,7 +5,7 @@ import Loader from "../../Components/Loader/Loader";
 import EventCard from "./EventCard";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://club-sphere-server-six.vercel.app/",
 });
 
 
@@ -13,7 +13,8 @@ const Events = () => {
   const { data: events = [], isLoading } = useQuery({
     queryKey: ["events"],
     queryFn: async () => {
-      const res = await axiosInstance.get("/events");
+      // const res = await axiosInstance.get("/events");
+      const res = await axiosInstance.get("events");
       return res.data;
     },
   });

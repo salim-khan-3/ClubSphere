@@ -4,7 +4,7 @@ import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const backendUrl = "http://localhost:3000";
+const backendUrl = "https://club-sphere-server-six.vercel.app/";
 
 const MyProfile = () => {
   const { user, setUser, updateUser, token } = useContext(AuthContext);
@@ -23,7 +23,8 @@ const MyProfile = () => {
     try {
       // 1️⃣ Backend update
       const res = await axios.patch(
-        `${backendUrl}/users/${encodeURIComponent(user.email)}`,
+        // `${backendUrl}/users/${encodeURIComponent(user.email)}`,
+        `${backendUrl}users/${encodeURIComponent(user.email)}`,
         updatedData,
         { headers: { Authorization: `Bearer ${token}` } }
       );

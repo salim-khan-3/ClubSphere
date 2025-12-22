@@ -443,7 +443,7 @@ const Sidebar = ({ isMobile = false, onClose = () => {} }) => {
     enabled: !!auth.currentUser?.email,
     queryFn: async () => {
       const token = await getToken();
-      const res = await axios.get("http://localhost:3000/users", {
+      const res = await axios.get("https://club-sphere-server-six.vercel.app/users", {
         headers: { authorization: `Bearer ${token}` },
       });
 

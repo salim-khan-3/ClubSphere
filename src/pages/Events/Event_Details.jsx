@@ -152,7 +152,7 @@ import { AuthContext } from "../../Context/AuthContext";
 import { toast } from "react-hot-toast";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://club-sphere-server-six.vercel.app/",
 });
 
 const Event_Details = () => {
@@ -169,7 +169,8 @@ const Event_Details = () => {
   } = useQuery({
     queryKey: ["event", id],
     queryFn: async () => {
-      const res = await axiosInstance.get(`/events/${id}`);
+      // const res = await axiosInstance.get(`/events/${id}`);
+      const res = await axiosInstance.get(`events/${id}`);
       return res.data;
     },
   });
@@ -180,7 +181,8 @@ const Event_Details = () => {
       const token = await user.getIdToken();
 
       await axiosInstance.post(
-        "/register-event",
+        // "/register-event",
+        "register-event",
         {
           eventId: event._id,
           paymentId: null,

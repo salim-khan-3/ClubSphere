@@ -19,7 +19,7 @@ const MyEvents = () => {
       const token = await user.getIdToken();
 
       const res = await axios.get(
-        "http://localhost:3000/dashboard/member/my-events",
+        "https://club-sphere-server-six.vercel.app/dashboard/member/my-events",
         {
           headers: {
             Authorization: `Bearer ${token}`,

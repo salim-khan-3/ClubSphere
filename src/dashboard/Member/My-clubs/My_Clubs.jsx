@@ -19,7 +19,7 @@ const My_Clubs = () => {
       const token = await user.getIdToken();
 
       const res = await axios.get(
-        "http://localhost:3000/dashboard/member/my-clubs",
+        "https://club-sphere-server-six.vercel.app/dashboard/member/my-clubs",
         {
           headers: {
             Authorization: `Bearer ${token}`,

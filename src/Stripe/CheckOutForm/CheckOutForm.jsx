@@ -450,7 +450,7 @@ const CheckoutForm = ({ club, event, onSuccess }) => {
     try {
       // 1️⃣ Create PaymentIntent
       const { data } = await axios.post(
-        "http://localhost:3000/create-payment-intent",
+        "https://club-sphere-server-six.vercel.app/create-payment-intent",
         { amount },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -476,7 +476,7 @@ const CheckoutForm = ({ club, event, onSuccess }) => {
       if (result.paymentIntent.status === "succeeded") {
         if (club) {
           await axios.post(
-            "http://localhost:3000/join-club",
+            "https://club-sphere-server-six.vercel.app/join-club",
             {
               clubId: club._id,
               paymentId: result.paymentIntent.id,
@@ -488,7 +488,7 @@ const CheckoutForm = ({ club, event, onSuccess }) => {
 
         if (event) {
           await axios.post(
-            "http://localhost:3000/register-event",
+            "https://club-sphere-server-six.vercel.app/register-event",
             {
               eventId: event._id,
               paymentId: result.paymentIntent.id,

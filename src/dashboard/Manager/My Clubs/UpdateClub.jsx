@@ -24,7 +24,7 @@ const UpdateClub = () => {
 
   // 🔹 Load existing club data
   useEffect(() => {
-    fetch(`http://localhost:3000/clubs/${id}`)
+    fetch(`https://club-sphere-server-six.vercel.app/clubs/${id}`)
       .then((res) => res.json())
       .then((data) => {
         reset({
@@ -42,7 +42,7 @@ const UpdateClub = () => {
   // 🔹 Update submit
   const onSubmit = async (data) => {
     try {
-      const res = await fetch(`http://localhost:3000/clubs/${id}`, {
+      const res = await fetch(`https://club-sphere-server-six.vercel.app/clubs/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

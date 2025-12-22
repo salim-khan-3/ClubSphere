@@ -138,7 +138,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { stripePromise } from "../../Stripe/Stripe";
 import CheckoutForm from "../../Stripe/CheckOutForm/CheckOutForm";
 
-const axiosInstance = axios.create({ baseURL: "http://localhost:3000" });
+const axiosInstance = axios.create({ baseURL: "https://club-sphere-server-six.vercel.app/" });
 
 const ClubDetailspage = () => {
   const { id } = useParams();
@@ -151,7 +151,8 @@ const ClubDetailspage = () => {
   } = useQuery({
     queryKey: ["club", id],
     queryFn: async () => {
-      const res = await axiosInstance.get(`/clubs/${id}`);
+      // const res = await axiosInstance.get(`/clubs/${id}`);
+      const res = await axiosInstance.get(`clubs/${id}`);
       return res.data;
     },
   });

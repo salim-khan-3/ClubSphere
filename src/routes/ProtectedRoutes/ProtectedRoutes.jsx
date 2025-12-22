@@ -7,7 +7,7 @@ import axios from "axios";
 import ModernLoader from "../ModernLoader/ModernLoader";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3000", 
+  baseURL: "https://club-sphere-server-six.vercel.app/", 
 });
 
 const ProtectedRoutes = ({ children, allowedRoles = [] }) => {
@@ -22,7 +22,7 @@ const ProtectedRoutes = ({ children, allowedRoles = [] }) => {
     queryKey: ["userRole", user?.email],
     queryFn: async () => {
       if (!user?.email) return "member";
-      const res = await axiosInstance.get(`/users/role-info?email=${user.email}`);
+      const res = await axiosInstance.get(`users/role-info?email=${user.email}`);
       return res.data.role || "member";
     },
     enabled: !!user?.email && !authLoading, 

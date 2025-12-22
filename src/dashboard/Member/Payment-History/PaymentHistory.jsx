@@ -18,7 +18,7 @@ const PaymentHistory = () => {
       const token = await user.getIdToken();
 
       const res = await axios.get(
-        "http://localhost:3000/dashboard/member/payments",
+        "https://club-sphere-server-six.vercel.app/dashboard/member/payments",
         {
           headers: {
             Authorization: `Bearer ${token}`,

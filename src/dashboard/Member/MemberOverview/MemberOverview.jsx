@@ -6,7 +6,7 @@ import { AuthContext } from "../../../Context/AuthContext";
 
 const fetchMemberOverview = async (token) => {
   if (!token) throw new Error("No token provided");
-  const { data } = await axios.get("http://localhost:3000/member-overview", {
+  const { data } = await axios.get("https://club-sphere-server-six.vercel.app/member-overview", {
     headers: {
       Authorization: `Bearer ${token}`,
     },

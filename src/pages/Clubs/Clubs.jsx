@@ -5,7 +5,7 @@ import { Link } from "react-router";
 import Loader from "../../Components/Loader/Loader"
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://club-sphere-server-six.vercel.app/",
 });
 
 const Clubs = () => {
@@ -14,7 +14,8 @@ const Clubs = () => {
   const { data: clubs = [], isLoading  } = useQuery({
     queryKey: ["clubs"],
     queryFn: async () => {
-      const res = await axiosInstance.get("/clubs/all");
+      // const res = await axiosInstance.get("/clubs/all");
+      const res = await axiosInstance.get("clubs/all");
       return res.data;
     },
   });
