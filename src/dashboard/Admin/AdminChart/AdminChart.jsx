@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
-import { auth } from '../../../firebase/firebase.init'; // আপনার পাথ অনুযায়ী ইম্পোর্ট করুন
+import { auth } from '../../firebase/firebase.init'; // আপনার পাথ অনুযায়ী ইম্পোর্ট করুন
 
 const AdminOverview = () => {
 

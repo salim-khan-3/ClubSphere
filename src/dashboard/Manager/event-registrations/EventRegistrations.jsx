@@ -1,143 +1,71 @@
-import React, { useContext } from "react";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { AuthContext } from "../../../Context/AuthContext";
+// import React, { useContext } from "react";
+// import { useQuery } from "@tanstack/react-query";
+// import axios from "axios";
+// import { AuthContext } from "../../../Context/AuthContext";
 
-const EventsRegistration = () => {
-  const { user, loading } = useContext(AuthContext);
+// const EventsRegistration = () => {
+//   const { user, loading } = useContext(AuthContext);
 
-  const { data: registrations = [], isLoading } = useQuery({
-    queryKey: ["my-event-registrations", user?.email],
-    enabled: !loading && !!user?.email,
-    queryFn: async () => {
-      const token = await user.getIdToken(); // 🔥 Firebase token
+//   const { data: registrations = [], isLoading } = useQuery({
+//     queryKey: ["my-event-registrations", user?.email],
+//     enabled: !loading && !!user?.email,
+//     queryFn: async () => {
+//       const token = await user.getIdToken(); // 🔥 Firebase token
 
-      const res = await axios.get(
-        "http://localhost:3000/my-event-registrations",
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      return res.data;
-    },
-  });
-
-  if (loading || isLoading) {
-    return <p className="text-center mt-10">Loading...</p>;
-  }
-
-  return (
-    <div className="p-6 bg-white rounded-lg shadow-md w-full max-w-5xl mx-auto">
-      <h2 className="text-2xl font-semibold mb-4">
-        My Event Registrations
-      </h2>
-
-      <div className="overflow-x-auto">
-        <table className="min-w-full border border-gray-200">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="py-2 px-4 border">#</th>
-              <th className="py-2 px-4 border text-left">Event Title</th>
-              <th className="py-2 px-4 border text-left">Club</th>
-              <th className="py-2 px-4 border text-left">Date</th>
-              <th className="py-2 px-4 border text-left">Location</th>
-              <th className="py-2 px-4 border text-left">Status</th>
-              <th className="py-2 px-4 border text-left">Registered At</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {registrations.map((reg, index) => (
-              <tr key={reg._id} className="hover:bg-gray-50">
-                <td className="py-2 px-4 border">{index + 1}</td>
-                <td className="py-2 px-4 border">
-                  {reg.eventInfo.title}
-                </td>
-                <td className="py-2 px-4 border">
-                  {reg.eventInfo.clubName}
-                </td>
-                <td className="py-2 px-4 border">
-                  {new Date(reg.eventInfo.date).toLocaleDateString()}
-                </td>
-                <td className="py-2 px-4 border">
-                  {reg.eventInfo.location}
-                </td>
-                <td
-                  className={`py-2 px-4 border font-medium ${
-                    reg.status === "cancelled"
-                      ? "text-red-500"
-                      : "text-green-600"
-                  }`}
-                >
-                  {reg.status}
-                </td>
-                <td className="py-2 px-4 border">
-                  {new Date(reg.registeredAt).toLocaleString()}
-                </td>
-              </tr>
-            ))}
-
-            {registrations.length === 0 && (
-              <tr>
-                <td
-                  colSpan="7"
-                  className="text-center py-6 text-gray-500"
-                >
-                  You have not registered for any events yet.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-};
-
-export default EventsRegistration;
-
-
-
-// import React, { useState } from "react";
-
-// const EventRegistrations = () => {
-//   const [registrations] = useState([
-//     {
-//       id: 1,
-//       userEmail: "user1@example.com",
-//       status: "registered",
-//       registeredAt: "2025-01-01T10:30:00Z",
+//       const res = await axios.get(
+//         "http://localhost:3000/my-event-registrations",
+//         {
+//           headers: {
+//             authorization: `Bearer ${token}`,
+//           },
+//         }
+//       );
+//       return res.data;
 //     },
-//     {
-//       id: 2,
-//       userEmail: "user2@example.com",
-//       status: "cancelled",
-//       registeredAt: "2025-01-02T14:10:00Z",
-//     },
-//   ]);
+//   });
+
+//   if (loading || isLoading) {
+//     return <p className="text-center mt-10">Loading...</p>;
+//   }
+
 //   return (
-//     <div className="p-6 bg-white rounded-lg shadow-md w-full max-w-4xl mx-auto">
-//       <h2 className="text-2xl font-semibold mb-4">Event Registrations</h2>
+//     <div className="p-6 bg-white rounded-lg shadow-md w-full max-w-5xl mx-auto">
+//       <h2 className="text-2xl font-semibold mb-4">
+//         My Event Registrations
+//       </h2>
 
 //       <div className="overflow-x-auto">
 //         <table className="min-w-full border border-gray-200">
 //           <thead className="bg-gray-100">
 //             <tr>
-//               <th className="py-2 px-4 border-b">#</th>
-//               <th className="py-2 px-4 border-b text-left">User Email</th>
-//               <th className="py-2 px-4 border-b text-left">Status</th>
-//               <th className="py-2 px-4 border-b text-left">Registered At</th>
+//               <th className="py-2 px-4 border">#</th>
+//               <th className="py-2 px-4 border text-left">Event Title</th>
+//               <th className="py-2 px-4 border text-left">Club</th>
+//               <th className="py-2 px-4 border text-left">Date</th>
+//               <th className="py-2 px-4 border text-left">Location</th>
+//               <th className="py-2 px-4 border text-left">Status</th>
+//               <th className="py-2 px-4 border text-left">Registered At</th>
 //             </tr>
 //           </thead>
+
 //           <tbody>
 //             {registrations.map((reg, index) => (
-//               <tr key={reg.id} className="hover:bg-gray-50">
-//                 <td className="py-2 px-4 border-b">{index + 1}</td>
-//                 <td className="py-2 px-4 border-b">{reg.userEmail}</td>
+//               <tr key={reg._id} className="hover:bg-gray-50">
+//                 <td className="py-2 px-4 border">{index + 1}</td>
+//                 <td className="py-2 px-4 border">
+//                   {reg.eventInfo.title}
+//                 </td>
+//                 <td className="py-2 px-4 border">
+//                   {reg.eventInfo.clubName}
+//                 </td>
+//                 <td className="py-2 px-4 border">
+//                   {new Date(reg.eventInfo.date).toLocaleDateString()}
+//                 </td>
+//                 <td className="py-2 px-4 border">
+//                   {reg.eventInfo.location}
+//                 </td>
 //                 <td
-//                   className={`py-2 px-4 border-b font-medium ${
+//                   className={`py-2 px-4 border font-medium ${
 //                     reg.status === "cancelled"
 //                       ? "text-red-500"
 //                       : "text-green-600"
@@ -145,11 +73,22 @@ export default EventsRegistration;
 //                 >
 //                   {reg.status}
 //                 </td>
-//                 <td className="py-2 px-4 border-b">
+//                 <td className="py-2 px-4 border">
 //                   {new Date(reg.registeredAt).toLocaleString()}
 //                 </td>
 //               </tr>
 //             ))}
+
+//             {registrations.length === 0 && (
+//               <tr>
+//                 <td
+//                   colSpan="7"
+//                   className="text-center py-6 text-gray-500"
+//                 >
+//                   You have not registered for any events yet.
+//                 </td>
+//               </tr>
+//             )}
 //           </tbody>
 //         </table>
 //       </div>
@@ -157,7 +96,68 @@ export default EventsRegistration;
 //   );
 // };
 
-// export default EventRegistrations;
+// export default EventsRegistration;
+
+
+
+import React, { useState } from "react";
+
+const EventRegistrations = () => {
+  const [registrations] = useState([
+    {
+      id: 1,
+      userEmail: "user1@example.com",
+      status: "registered",
+      registeredAt: "2025-01-01T10:30:00Z",
+    },
+    {
+      id: 2,
+      userEmail: "user2@example.com",
+      status: "cancelled",
+      registeredAt: "2025-01-02T14:10:00Z",
+    },
+  ]);
+  return (
+    <div className="p-6 bg-white rounded-lg shadow-md w-full max-w-4xl mx-auto">
+      <h2 className="text-2xl font-semibold mb-4">Event Registrations</h2>
+
+      <div className="overflow-x-auto">
+        <table className="min-w-full border border-gray-200">
+          <thead className="bg-gray-100">
+            <tr>
+              <th className="py-2 px-4 border-b">#</th>
+              <th className="py-2 px-4 border-b text-left">User Email</th>
+              <th className="py-2 px-4 border-b text-left">Status</th>
+              <th className="py-2 px-4 border-b text-left">Registered At</th>
+            </tr>
+          </thead>
+          <tbody>
+            {registrations.map((reg, index) => (
+              <tr key={reg.id} className="hover:bg-gray-50">
+                <td className="py-2 px-4 border-b">{index + 1}</td>
+                <td className="py-2 px-4 border-b">{reg.userEmail}</td>
+                <td
+                  className={`py-2 px-4 border-b font-medium ${
+                    reg.status === "cancelled"
+                      ? "text-red-500"
+                      : "text-green-600"
+                  }`}
+                >
+                  {reg.status}
+                </td>
+                <td className="py-2 px-4 border-b">
+                  {new Date(reg.registeredAt).toLocaleString()}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+export default EventRegistrations;
 
 
 

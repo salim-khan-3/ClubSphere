@@ -9,7 +9,7 @@ const ClubMembers = () => {
   const { user } = useContext(AuthContext);
   const queryClient = useQueryClient();
 
-  // Fetch club members
+  // ১. মেম্বারদের ডাটা ফেচ করা
   const {
     data: clubsWithMembers = [],
     isLoading,
@@ -27,7 +27,7 @@ const ClubMembers = () => {
     enabled: !!user?.email,
   });
 
-  // Mutation for setting membership expired
+  // ২. মেম্বারশিপ Expired করার মিউটেশন
   const mutation = useMutation({
     mutationFn: async ({ clubId, userEmail }) => {
       const token = await user.getIdToken();
@@ -43,7 +43,7 @@ const ClubMembers = () => {
         title: "Success!",
         text: "Membership has been set to expired.",
         icon: "success",
-        timer: 2000,
+        timer: 1500,
         showConfirmButton: false,
       });
     },
@@ -58,13 +58,13 @@ const ClubMembers = () => {
 
   const handleSetExpired = async (clubId, userEmail, memberName) => {
     const result = await Swal.fire({
-      title: "Set Membership Expired?",
-      text: `Are you sure you want to expire ${memberName}'s membership?`,
+      title: "Are you sure?",
+      text: `Do you want to expire ${memberName}'s membership? This action cannot be undone.`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: "Yes, expire it",
-      cancelButtonText: "Cancel",
-      confirmButtonColor: "#d33",
+      confirmButtonColor: "#EF4444",
+      cancelButtonColor: "#6B7280",
+      confirmButtonText: "Yes, Expire it!",
     });
 
     if (result.isConfirmed) {
@@ -73,86 +73,81 @@ const ClubMembers = () => {
   };
 
   if (isLoading) return <Loader />;
-  if (isError)
-    return (
-      <div className="text-center text-red-600 py-10">
-        Error: {error?.message || "Failed to load members"}
-      </div>
-    );
-
-  if (clubsWithMembers.length === 0) {
-    return (
-      <div className="w-full max-w-6xl mx-auto p-8 text-center">
-        <h2 className="text-2xl font-semibold mb-6">Club Members</h2>
-        <p className="text-gray-500">You don't have any clubs with members yet.</p>
-      </div>
-    );
-  }
+  if (isError) return <div className="text-center text-red-600 py-10">Error: {error?.message}</div>;
 
   return (
-    <div className="w-full max-w-6xl mx-auto p-8">
-      <h2 className="text-2xl font-semibold mb-8">Club Members</h2>
+    <div className="w-full max-w-7xl mx-auto p-8 bg-gray-50 min-h-screen">
+      <h2 className="text-3xl font-bold mb-10 text-gray-800">Manage Club Members</h2>
 
-      {clubsWithMembers.map((club) => (
-        <div key={club.clubId} className="mb-12">
-          <h3 className="text-xl font-bold mb-4 text-indigo-700">
-            {club.clubName} ({club.members.length} members)
-          </h3>
+      {clubsWithMembers.length === 0 ? (
+        <div className="bg-white p-10 rounded-xl shadow text-center">
+          <p className="text-gray-500">You don't have any clubs with members yet.</p>
+        </div>
+      ) : (
+        clubsWithMembers.map((club) => (
+          <div key={club.clubId} className="mb-10 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="bg-indigo-600 px-6 py-4">
+              <h3 className="text-xl font-bold text-white uppercase tracking-wide">
+                {club.clubName} <span className="text-indigo-200 text-sm ml-2">({club.members.length} Members)</span>
+              </h3>
+            </div>
 
-          {club.members.length === 0 ? (
-            <p className="text-gray-500 italic">No members yet</p>
-          ) : (
             <div className="overflow-x-auto">
-              <table className="min-w-full bg-white rounded-lg shadow">
-                <thead className="bg-gray-100">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
                   <tr>
-                    <th className="text-left px-6 py-3">Photo</th>
-                    <th className="text-left px-6 py-3">Name</th>
-                    <th className="text-left px-6 py-3">Email</th>
-                    <th className="text-left px-6 py-3">Status</th>
-                    <th className="text-left px-6 py-3">Join Date</th>
-                    <th className="text-left px-6 py-3">Actions</th>
+                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Member</th>
+                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Status</th>
+                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Join Date</th>
+                    <th className="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase">Actions</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="bg-white divide-y divide-gray-200">
                   {club.members.map((member) => (
-                    <tr key={member.email} className="hover:bg-gray-50 border-b">
-                      <td className="px-6 py-4">
-                        <img
-                          src={member.photoURL || "https://via.placeholder.com/40"}
-                          alt={member.name}
-                          className="w-10 h-10 rounded-full object-cover"
-                        />
+                    <tr key={member.email} className="hover:bg-gray-50 transition-colors">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <img className="h-10 w-10 rounded-full border-2 border-indigo-100" src={member.photoURL || "https://i.ibb.co/mR79Y6B/user.png"} alt="" />
+                          <div className="ml-4">
+                            <div className="text-sm font-bold text-gray-900">{member.name}</div>
+                            <div className="text-sm text-gray-500">{member.email}</div>
+                          </div>
+                        </div>
                       </td>
-                      <td className="px-6 py-4 font-medium">{member.name}</td>
-                      <td className="px-6 py-4">{member.email}</td>
-                      <td className="px-6 py-4">
-                        <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                          member.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                        }`}>
                           {member.status}
                         </span>
                       </td>
-                      <td className="px-6 py-4">
-                        {new Date(member.joinedAt).toLocaleDateString()}
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {new Date(member.joinedAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <button
-                          onClick={() =>
-                            handleSetExpired(club.clubId, member.email, member.name)
-                          }
-                          disabled={mutation.isPending}
-                          className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 disabled:opacity-50 transition"
+                          onClick={() => handleSetExpired(club.clubId, member.email, member.name)}
+                          disabled={mutation.isPending || member.status === "Expired"}
+                          className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                            member.status === "Expired" 
+                            ? "bg-gray-100 text-gray-400 cursor-not-allowed" 
+                            : "bg-red-50 text-red-600 hover:bg-red-600 hover:text-white border border-red-200"
+                          }`}
                         >
-                          {mutation.isPending ? "Processing..." : "Set Expired"}
+                          {member.status === "Expired" ? "Terminated" : "Set Expired"}
                         </button>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
+              {club.members.length === 0 && (
+                <div className="p-8 text-center text-gray-400 italic">No members found in this club.</div>
+              )}
             </div>
-          )}
-        </div>
-      ))}
+          </div>
+        ))
+      )}
     </div>
   );
 };
