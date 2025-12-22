@@ -32,12 +32,14 @@ import Event_Details from "../pages/Events/Event_Details";
 import UpdateClub from "../dashboard/Manager/My Clubs/UpdateClub";
 import UpdateEvent from "../dashboard/Manager/events-Management/UpdateEvent";
 import ProfilePage from "../pages/ProfilePage/ProfilePage";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 // import MyProfile from "../pages/ProfilePage/MyProfile";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: MainLayouts,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
       {
         index: true,
